@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -37,16 +36,37 @@
 <body>
     <h1>Péndulo Digital</h1>
     <p>Toca un botón y deja que la energía responda...</p>
-    <button onclick="diagnostico()">Diagnóstico</button>
+    <button onclick="diagnostico()">Diagnóstico General</button>
     <button onclick="cargar()">Cargar Energía</button>
     <button onclick="mensaje()">Mensaje</button>
     <div id="output"></div>
 
     <script>
         function diagnostico() {
-            const respuestas = ['Sí', 'No', 'Bloqueo', 'Apertura', 'Repetir', 'Confía'];
+            const respuestas = [
+                "Chakra raíz bloqueado",
+                "Chakra corazón hiperactivo",
+                "Canal central fluido",
+                "Conexión con guía activa",
+                "Campo áurico debilitado",
+                "Campo áurico brillante",
+                "Necesita grounding",
+                "Interferencia externa",
+                "Patrón ancestral activo",
+                "Requiere limpieza energética",
+                "Desalineación eje cuerpo-mente",
+                "Falta propósito vital",
+                "Intuición inhibida",
+                "Fuga energética",
+                "Corte con el alma",
+                "Protección espiritual activa",
+                "Zona abdominal vulnerable",
+                "Pineal activa",
+                "Activación espiritual en curso",
+                "Estás en tu centro"
+            ];
             const respuesta = respuestas[Math.floor(Math.random() * respuestas.length)];
-            document.getElementById('output').innerText = 'Respuesta: ' + respuesta;
+            document.getElementById('output').innerText = 'Diagnóstico: ' + respuesta;
         }
 
         function cargar() {
