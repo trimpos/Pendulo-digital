@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,82 +6,327 @@
     <title>Péndulo Digital</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+body { font-size: 1.2em; line-height: 1.5em; }
         body {
             background-color: #111;
             color: #e2e2e2;
             font-family: 'Georgia', serif;
-            text-align: center;
             padding: 2em;
         }
         h1 {
-            font-size: 2em;
-            margin-bottom: 1em;
             color: #cfa;
+            text-align: center;
         }
-        button {
+        button, select {
             background-color: #333;
             color: #fff;
-            padding: 1em 2em;
-            margin: 1em;
+            padding: 1em;
+            margin: 0.5em;
             border: 2px solid #777;
-            font-size: 1.2em;
+            font-size: 1em;
             border-radius: 8px;
         }
-        #output {
+        .section {
             margin-top: 2em;
-            font-size: 1.5em;
+        }
+        .section h2 {
             color: #ffea00;
+            font-size: 1.3em;
+            border-bottom: 1px solid #444;
+            padding-bottom: 0.3em;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        li {
+            background-color: #222;
+            margin: 0.3em 0;
+            padding: 0.5em;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
+
+    <div style="text-align: center; margin-bottom: 1em;">
+        
+
+
+    <div style="text-align: center; margin-bottom: 1em;">
+        
+        <input type="text" id="paciente" placeholder="Nombre completo" style="padding: 0.5em; border-radius: 6px; border: 1px solid #555; width: 200px; margin-right: 1em;">
+        
+        <input type="date" id="fechaNacimiento" style="padding: 0.5em; border-radius: 6px; border: 1px solid #555;">
+    </div>
+
+
+    <div style="text-align: center; margin-bottom: 1em;">
+        <label for="paciente">👤 Nombre del paciente:</label>
+        <input type="text" id="paciente" placeholder="Nombre completo" style="padding: 0.5em; border-radius: 6px; border: 1px solid #555; width: 200px;">
+    </div>
+
     <h1>Péndulo Digital</h1>
-    <p>Toca un botón y deja que la energía responda...</p>
-    <button onclick="diagnostico()">Diagnóstico General</button>
-    <button onclick="cargar()">Cargar Energía</button>
-    <button onclick="mensaje()">Mensaje</button>
-    <div id="output"></div>
+
+    <div style="text-align: center;">
+        <button onclick="diagnostico()">Diagnóstico General</button>
+        <button onclick="cargar()">Cargar Energía General</button>
+        <button onclick="mensaje()">Mensaje</button>
+    </div>
+
+    <div style="text-align: center;">
+        <label for="zona">Zona del cuerpo:</label>
+        <select id="zona">
+            <option value="Cabeza">Cabeza</option>
+            <option value="Tronco">Tronco</option>
+            <option value="Abdomen">Abdomen</option>
+            <option value="Columna cervical">Columna cervical</option>
+            <option value="Columna dorsal">Columna dorsal</option>
+            <option value="Columna lumbar">Columna lumbar</option>
+            <option value="Columna sacra">Columna sacra</option>
+            <option value="Miembros superiores">Miembros superiores</option>
+            <option value="Miembros inferiores">Miembros inferiores</option>
+        </select>
+        <button onclick="diagnosticoFisico()">Diagnóstico Físico</button>
+        <button onclick="cargarEnergiaFisica()">Cargar Energía Física</button>
+    </div>
+
+    <div style="text-align: center;">
+        <label for="emocion">Emoción:</label>
+        <select id="emocion">
+            <option value="Miedo">Miedo</option>
+            <option value="Tristeza">Tristeza</option>
+            <option value="Enojo">Enojo</option>
+            <option value="Culpa">Culpa</option>
+            <option value="Vergüenza">Vergüenza</option>
+            <option value="Ansiedad">Ansiedad</option>
+            <option value="Alegría">Alegría</option>
+            <option value="Amor bloqueado">Amor bloqueado</option>
+            <option value="Confusión">Confusión</option>
+            <option value="Indiferencia">Indiferencia</option>
+        </select>
+        <button onclick="diagnosticoEmocional()">Diagnóstico Emocional</button>
+        <button onclick="cargarEnergiaEmocional()">Cargar Energía Emocional</button>
+    </div>
+
+    <div style="text-align: center;">
+        <label for="mente">Mente:</label>
+        <select id="mente">
+            <option value="Rumiación">Rumiación</option>
+            <option value="Falta de enfoque">Falta de enfoque</option>
+            <option value="Hiperactividad mental">Hiperactividad mental</option>
+            <option value="Desconexión cognitiva">Desconexión cognitiva</option>
+            <option value="Obsesión">Obsesión</option>
+            <option value="Autoexigencia">Autoexigencia</option>
+            <option value="Ruido mental">Ruido mental</option>
+            <option value="Negatividad">Negatividad</option>
+            <option value="Evasión">Evasión</option>
+            <option value="Conflicto interno">Conflicto interno</option>
+        </select>
+        <button onclick="diagnosticoMental()">Diagnóstico Mental</button>
+        <button onclick="cargarEnergiaMental()">Cargar Energía Mental</button>
+    </div>
+
+    
+    <div style="text-align: center; margin-top: 2em;">
+        <button onclick="resetearLectura()">🧹 Limpiar Lectura</button>
+    </div>
+
+
+
+    <div style="text-align: center; margin-top: 2em;">
+        <button onclick="guardarLectura()">💾 Guardar Lectura</button>
+    </div>
+
+
+<div class="section">
+        <h2>Diagnóstico Mental</h2>
+        <ul id="mentalList"></ul>
+
+        <h2>Diagnóstico Emocional</h2>
+        <ul id="emocionalList"></ul>
+
+        <h2>Diagnóstico Físico</h2>
+        <ul id="fisicoList"></ul>
+
+        <h2>Diagnóstico General</h2>
+        <ul id="generalList"></ul>
+
+        <h2>Mensajes</h2>
+        <ul id="mensajeList"></ul>
+    </div>
 
     <script>
+        function agregar(lista, texto) {
+            const li = document.createElement("li");
+            li.textContent = texto;
+            document.getElementById(lista).appendChild(li);
+        }
+
         function diagnostico() {
-            const respuestas = [
-                "Chakra raíz bloqueado",
-                "Chakra corazón hiperactivo",
-                "Canal central fluido",
-                "Conexión con guía activa",
-                "Campo áurico debilitado",
-                "Campo áurico brillante",
-                "Necesita grounding",
-                "Interferencia externa",
-                "Patrón ancestral activo",
-                "Requiere limpieza energética",
-                "Desalineación eje cuerpo-mente",
-                "Falta propósito vital",
-                "Intuición inhibida",
-                "Fuga energética",
-                "Corte con el alma",
-                "Protección espiritual activa",
-                "Zona abdominal vulnerable",
-                "Pineal activa",
-                "Activación espiritual en curso",
-                "Estás en tu centro"
-            ];
-            const respuesta = respuestas[Math.floor(Math.random() * respuestas.length)];
-            document.getElementById('output').innerText = 'Diagnóstico: ' + respuesta;
+            const respuestas = ["Chakra raíz bloqueado", "Chakra corazón hiperactivo", "Canal central fluido", "Conexión con guía activa", "Campo áurico debilitado", "Campo áurico brillante", "Necesita grounding", "Interferencia externa", "Patrón ancestral activo", "Requiere limpieza energética", "Desalineación eje cuerpo-mente", "Falta propósito vital", "Intuición inhibida", "Fuga energética", "Corte con el alma", "Protección espiritual activa", "Zona abdominal vulnerable", "Pineal activa", "Activación espiritual en curso", "Estás en tu centro"];
+            const r = respuestas[Math.floor(Math.random() * respuestas.length)];
+            agregar("generalList", r);
         }
 
         function cargar() {
-            document.getElementById('output').innerText = 'Cargando energía... Visualiza tu intención.';
-            setTimeout(() => {
-                document.getElementById('output').innerText = 'Carga completada.';
-            }, 3000);
+            agregar("generalList", "Cargando energía... Visualiza tu intención.");
+            setTimeout(() => agregar("generalList", "Carga completada."), 3000);
         }
 
         function mensaje() {
-            const mensajes = ['144', 'Abrir canal', 'Eleva tu frecuencia', '3-6-9', 'Nombre sagrado', 'Activa tu propósito'];
-            const mensaje = mensajes[Math.floor(Math.random() * mensajes.length)];
-            document.getElementById('output').innerText = 'Mensaje: ' + mensaje;
+            const mensajes = ["144", "Abrir canal", "Eleva tu frecuencia", "3-6-9", "Nombre sagrado", "Activa tu propósito"];
+            const m = mensajes[Math.floor(Math.random() * mensajes.length)];
+            agregar("mensajeList", m);
         }
-    </script>
+
+        function diagnosticoFisico() {
+            const zona = document.getElementById("zona").value;
+            const d = {
+                "Cabeza": ["Dolor de cabeza", "Migraña", "Vértigo", "Sinusitis", "Tensión en el cuello"],
+                "Tronco": ["Dolor torácico", "Fatiga respiratoria", "Presión en el pecho", "Dolor intercostal", "Contractura muscular"],
+                "Abdomen": ["Dolor abdominal", "Gases o hinchazón", "Indigestión", "Náuseas", "Estreñimiento"],
+                "Columna cervical": ["Rigidez de cuello", "Dolor al girar la cabeza", "Pinzamiento cervical", "Contractura en hombros", "Zumbido por tensión cervical"],
+                "Columna dorsal": ["Dolor entre los omóplatos", "Postura encorvada", "Tensión media en la espalda", "Espasmo dorsal", "Fatiga por mala postura"],
+                "Columna lumbar": ["Dolor lumbar", "Lumbalgia", "Ciática", "Hernia de disco", "Tensión baja de espalda"],
+                "Columna sacra": ["Dolor en el coxis", "Tensión pélvica", "Irritación del nervio sacro", "Molestia al estar sentado", "Inflamación sacra leve"],
+                "Miembros superiores": ["Dolor de hombros", "Tensión en brazos", "Entumecimiento de manos", "Cansancio al cargar peso", "Pinzamiento en muñeca"],
+                "Miembros inferiores": ["Pesadez en piernas", "Calambres nocturnos", "Dolor de rodillas", "Inflamación de tobillos", "Entumecimiento de pies"]
+            };
+            const r = d[zona][Math.floor(Math.random() * d[zona].length)];
+            agregar("fisicoList", zona + ": " + r);
+        }
+
+        function cargarEnergiaFisica() {
+            const zona = document.getElementById("zona").value;
+            agregar("fisicoList", "Cargando energía en " + zona + "...");
+            setTimeout(() => agregar("fisicoList", "Carga completada en " + zona + "."), 3000);
+        }
+
+        function diagnosticoEmocional() {
+            const emocion = document.getElementById("emocion").value;
+            const d = {
+                "Miedo": ["Miedo a perder el control", "Miedo al rechazo", "Miedo al futuro", "Miedo a la enfermedad", "Miedo a mostrar vulnerabilidad"],
+                "Tristeza": ["Pérdida no procesada", "Melancolía persistente", "Desconexión emocional", "Falta de motivación", "Llanto contenido"],
+                "Enojo": ["Irritación acumulada", "Furia reprimida", "Impaciencia constante", "Reacción exagerada", "Rabia silenciosa"],
+                "Culpa": ["Culpa por no cumplir expectativas", "Autocastigo interno", "Remordimiento antiguo", "Sensación de haber fallado", "Carga moral excesiva"],
+                "Vergüenza": ["Sentimiento de inferioridad", "Vergüenza del cuerpo", "Deseo de desaparecer", "Recuerdo humillante", "Autoimagen negativa"],
+                "Ansiedad": ["Preocupación constante", "Pensamiento acelerado", "Miedo anticipatorio", "Sensación de ahogo", "Inquietud sin causa aparente"],
+                "Alegría": ["Alegría contagiosa", "Gratitud profunda", "Ligereza en el corazón", "Plenitud interior", "Gozo inesperado"],
+                "Amor bloqueado": ["Temor a ser amado", "Dificultad para expresar afecto", "Cierre del corazón", "Resentimiento antiguo", "Desconfianza emocional"],
+                "Confusión": ["Dudas existenciales", "Niebla mental", "Decisión postergada", "Desorientación emocional", "Pérdida de sentido"],
+                "Indiferencia": ["Desconexión afectiva", "Falta de interés por el entorno", "Letargo emocional", "Ausencia de empatía", "Sensación de vacío"]
+            };
+            const r = d[emocion][Math.floor(Math.random() * d[emocion].length)];
+            agregar("emocionalList", emocion + ": " + r);
+        }
+
+        function cargarEnergiaEmocional() {
+            const emocion = document.getElementById("emocion").value;
+            agregar("emocionalList", "Cargando energía en emoción: " + emocion + "...");
+            setTimeout(() => agregar("emocionalList", "Carga emocional completada."), 3000);
+        }
+
+        function diagnosticoMental() {
+            const mente = document.getElementById("mente").value;
+            const d = {
+                "Rumiación": ["Pensamientos repetitivos sobre el pasado", "No puede soltar lo que ya fue", "Revive errores una y otra vez", "Mente atada a una escena antigua", "Culpa por algo que no se resuelve"],
+                "Falta de enfoque": ["Dificultad para concentrarse", "Mente saltando entre ideas", "Olvidos frecuentes", "Falta de presencia en tareas simples", "Atención dispersa"],
+                "Hiperactividad mental": ["Ideas aceleradas sin pausa", "No puede desconectar", "Impulsividad en decisiones", "Agotamiento por sobrepensar", "Desbordamiento de estímulos"],
+                "Desconexión cognitiva": ["Mente nublada", "No se encuentra el hilo lógico", "Sensación de vacío mental", "Falta de claridad para actuar", "Despersonalización"],
+                "Obsesión": ["Pensamientos fijos incontrolables", "Necesidad de revisar o confirmar", "Ideas dominantes e intrusivas", "Dependencia del control", "Miedo constante a fallar"],
+                "Autoexigencia": ["No se permite descansar", "Crítica interna constante", "Nunca es suficiente", "Se compara con todos", "Presión mental autoimpuesta"],
+                "Ruido mental": ["Demasiadas voces internas", "No hay silencio interior", "Mente como un mercado", "Interferencia constante", "Falta de espacio para el descanso"],
+                "Negatividad": ["Todo parece salir mal", "Expectativas sombrías", "Pensamiento pesimista constante", "Enfoque en el fracaso", "Desconfianza mental"],
+                "Evasión": ["Fuga hacia fantasías", "Evita enfrentar lo real", "Se refugia en distracciones", "Negación del presente", "Mente escapista"],
+                "Conflicto interno": ["Dos voces opuestas dentro", "Indecisión paralizante", "Ambivalencia constante", "Tensión entre deber y querer", "No logra alinearse"]
+            };
+            const r = d[mente][Math.floor(Math.random() * d[mente].length)];
+            agregar("mentalList", mente + ": " + r);
+        }
+
+        function cargarEnergiaMental() {
+            const mente = document.getElementById("mente").value;
+            agregar("mentalList", "Cargando energía en mente: " + mente + "...");
+            setTimeout(() => agregar("mentalList", "Carga mental completada."), 3000);
+        }
+    
+    function resetearLectura() {
+        document.getElementById("mentalList").innerHTML = "";
+        document.getElementById("emocionalList").innerHTML = "";
+        document.getElementById("fisicoList").innerHTML = "";
+        document.getElementById("generalList").innerHTML = "";
+        document.getElementById("mensajeList").innerHTML = "";
+    }
+
+    function guardarLectura() {
+        const paciente = document.getElementById("paciente").value || "sin_nombre";
+        const fecha = new Date().toLocaleString();
+        let contenido = "🌀 Lectura de Péndulo Digital\n";
+        contenido += "👤 Paciente: " + paciente + "\n";
+        contenido += "📆 Fecha: " + fecha + "\n\n";
+
+        function extraerLista(id, titulo) {
+            const items = document.getElementById(id).querySelectorAll("li");
+            if (items.length > 0) {
+                contenido += titulo + "\n";
+                items.forEach(li => {
+                    contenido += "- " + li.textContent + "\n";
+                });
+                contenido += "\n";
+            }
+        }
+
+        extraerLista("mentalList", "Diagnóstico Mental");
+        extraerLista("emocionalList", "Diagnóstico Emocional");
+        extraerLista("fisicoList", "Diagnóstico Físico");
+        extraerLista("generalList", "Diagnóstico General");
+        extraerLista("mensajeList", "Mensajes");
+
+        const blob = new Blob([contenido], { type: 'text/plain' });
+        const enlace = document.createElement("a");
+        enlace.href = URL.createObjectURL(blob);
+        enlace.download = "lectura_" + paciente.replace(/\s+/g, "_") + ".txt";
+        enlace.click();
+    }
+
+    function limpiarCampos() {
+        document.getElementById("paciente").value = "";
+        document.getElementById("fechaNacimiento").value = "";
+    }
+
+    function guardarLectura() {
+        const paciente = document.getElementById("paciente").value || "sin_nombre";
+        const fecha = new Date().toLocaleString();
+        const nacimiento = document.getElementById('fechaNacimiento').value || 'no registrada';
+        let contenido = "INFORME DE CONSULTA RADIÓNICA\n";
+        contenido += "Paciente: " + paciente + "\n";
+        contenido += "Fecha de nacimiento: " + nacimiento + "\n";
+        contenido += "Fecha de consulta: " + fecha + "\n\n";
+
+        function extraerLista(id, titulo) {
+            const items = document.getElementById(id).querySelectorAll("li");
+            if (items.length > 0) {
+                contenido += titulo + "\n";
+                items.forEach(li => {
+                    contenido += "    - " + li.textContent + "\n";
+                });
+                contenido += "\n";
+            }
+        }
+
+        extraerLista("mentalList", "Diagnóstico Mental:");
+        extraerLista("emocionalList", "Diagnóstico Emocional:");
+        extraerLista("fisicoList", "Diagnóstico Físico:");
+        extraerLista("generalList", "Diagnóstico General:");
+        extraerLista("mensajeList", "Mensajes:");
+
+        const blob = new Blob([contenido], { type: 'text/plain' });
+        const enlace = document.createElement("a");
+        enlace.href = URL.createObjectURL(blob);
+        enlace.download = "lectura_" + paciente.replace(/\s+/g, "_") + ".txt";
+        enlace.click();
+    }
+</script>
 </body>
 </html>
