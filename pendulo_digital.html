@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Péndulo Digital</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #111;
+            color: #e2e2e2;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            padding: 2em;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 1em;
+            color: #cfa;
+        }
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 1em 2em;
+            margin: 1em;
+            border: 2px solid #777;
+            font-size: 1.2em;
+            border-radius: 8px;
+        }
+        #output {
+            margin-top: 2em;
+            font-size: 1.5em;
+            color: #ffea00;
+        }
+    </style>
+</head>
+<body>
+    <h1>Péndulo Digital</h1>
+    <p>Toca un botón y deja que la energía responda...</p>
+    <button onclick="diagnostico()">Diagnóstico</button>
+    <button onclick="cargar()">Cargar Energía</button>
+    <button onclick="mensaje()">Mensaje</button>
+    <div id="output"></div>
+
+    <script>
+        function diagnostico() {
+            const respuestas = ['Sí', 'No', 'Bloqueo', 'Apertura', 'Repetir', 'Confía'];
+            const respuesta = respuestas[Math.floor(Math.random() * respuestas.length)];
+            document.getElementById('output').innerText = 'Respuesta: ' + respuesta;
+        }
+
+        function cargar() {
+            document.getElementById('output').innerText = 'Cargando energía... Visualiza tu intención.';
+            setTimeout(() => {
+                document.getElementById('output').innerText = 'Carga completada.';
+            }, 3000);
+        }
+
+        function mensaje() {
+            const mensajes = ['144', 'Abrir canal', 'Eleva tu frecuencia', '3-6-9', 'Nombre sagrado', 'Activa tu propósito'];
+            const mensaje = mensajes[Math.floor(Math.random() * mensajes.length)];
+            document.getElementById('output').innerText = 'Mensaje: ' + mensaje;
+        }
+    </script>
+</body>
+</html>
